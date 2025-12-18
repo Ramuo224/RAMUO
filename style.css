@@ -1,39 +1,87 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --card: #1f2937;
+  --border: #334155;
+}
+
+* { box-sizing: border-box; }
 body {
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #e5e7eb;
   margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
-header, footer {
-  background: #111827;
+
+.header {
+  background: var(--panel);
   padding: 16px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
 }
-main {
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), #ec4899);
+  display: grid; place-items: center; font-weight: bold;
+}
+.title h1 { margin: 0; font-size: 24px; }
+.title p { margin: 0; color: var(--muted); font-size: 14px; }
+
+main { max-width: 600px; margin: 20px auto; padding: 0 16px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 20px;
+  margin-bottom: 20px;
 }
-input, textarea, button {
-  display: block;
-  margin: 8px 0;
+.form { margin-bottom: 16px; }
+input, textarea {
+  width: 100%;
   padding: 10px;
-  border-radius: 6px;
-  border: none;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0b1223;
+  color: var(--text);
 }
 button {
-  background: #6366f1;
-  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
+  font-weight: 600;
 }
-button:hover {
-  background: #4f46e5;
-}
-.hidden {
-  display: none;
+.primary { background: var(--primary); color: white; }
+.primary:hover { background: var(--primary-hover); }
+.secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+.hidden { display: none; }
+
+.messages {
+  margin-top: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #0b1223;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
 }
 .message {
-  background: #1f2937;
+  background: #13203a;
   padding: 8px;
-  margin: 4px 0;
-  border-radius: 6px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+.footer {
+  text-align: center;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
 }

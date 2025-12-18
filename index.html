@@ -8,39 +8,44 @@
 </head>
 <body>
   <header class="header">
-    <h1>RAMUO</h1>
-    <p>Trouve ton âme sœur en toute simplicité</p>
+    <div class="brand">
+      <div class="logo">R</div>
+      <div class="title">
+        <h1>RAMUO</h1>
+        <p>Trouve ton âme sœur en toute simplicité</p>
+      </div>
+    </div>
   </header>
 
   <main>
     <!-- Section Auth -->
-    <section id="authSection">
+    <section id="authSection" class="card">
       <h2>Connexion / Inscription</h2>
-      <div>
+      <div class="form">
         <input type="email" id="regEmail" placeholder="Email" />
-        <input type="password" id="regPassword" placeholder="Mot de passe" />
-        <button id="btnRegister">Inscription</button>
+        <input type="password" id="regPassword" placeholder="Mot de passe (≥6 caractères)" />
+        <button id="btnRegister" class="primary">Inscription</button>
       </div>
-      <div>
+      <div class="form">
         <input type="email" id="logEmail" placeholder="Email" />
         <input type="password" id="logPassword" placeholder="Mot de passe" />
-        <button id="btnLogin">Connexion</button>
+        <button id="btnLogin" class="primary">Connexion</button>
       </div>
       <p id="userStatus">Non connecté</p>
-      <button id="btnLogout" class="hidden">Déconnexion</button>
+      <button id="btnLogout" class="secondary hidden">Déconnexion</button>
     </section>
 
     <!-- Section Chat -->
-    <section id="chatSection" class="hidden">
+    <section id="chatSection" class="card hidden">
       <h2>Messages RAMUO</h2>
       <input type="text" id="profileName" placeholder="Ton prénom ou pseudo" />
       <textarea id="messageInput" placeholder="Écris ton message..."></textarea>
-      <button id="btnSend">Envoyer</button>
-      <div id="messages"></div>
+      <button id="btnSend" class="primary">Envoyer</button>
+      <div id="messages" class="messages"></div>
     </section>
   </main>
 
-  <footer>
+  <footer class="footer">
     <p>© RAMUO — Rencontre authentique</p>
   </footer>
 
