@@ -5,95 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RAMUO — Rencontre authentique</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
-    <div class="brand">
-      <div class="logo">R</div>
-      <div class="title">
-        <h1>RAMUO</h1>
-        <p>Trouve ton âme sœur en toute simplicité</p>
-      </div>
-    </div>
-    <nav class="nav">
-      <button id="btnHome" class="link active">Accueil</button>
-      <button id="btnAuth" class="link">Connexion</button>
-      <button id="btnChat" class="link">Messages</button>
-    </nav>
+    <h1>RAMUO</h1>
+    <p>Trouve ton âme sœur en toute simplicité</p>
   </header>
 
   <main>
-    <!-- Section Accueil -->
-    <section id="homeSection" class="section">
-      <div class="hero">
-        <h2>Des rencontres vraies, près de toi</h2>
-        <p>Inscris-toi gratuitement, crée ton profil et commence la conversation.</p>
-        <button id="btnStart" class="primary">Commencer</button>
-      </div>
-      <div class="features">
-        <div class="card">
-          <h3>Profil simple</h3>
-          <p>Ajoute ta photo, ta bio et tes centres d’intérêt.</p>
-        </div>
-        <div class="card">
-          <h3>Messages privés</h3>
-          <p>Discute en direct avec les personnes qui t’intéressent.</p>
-        </div>
-        <div class="card">
-          <h3>Gratuit</h3>
-          <p>Hébergement GitHub Pages, base de données Firebase.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- Section Auth -->
-    <section id="authSection" class="section hidden">
-      <div class="auth-container">
-        <h2>Connexion / Inscription</h2>
-        <div class="auth-forms">
-          <div class="auth-form">
-            <h3>Créer un compte</h3>
-            <input type="email" id="regEmail" placeholder="Email" />
-            <input type="password" id="regPassword" placeholder="Mot de passe" />
-            <button id="btnRegister" class="primary">Inscription</button>
-          </div>
-          <div class="auth-form">
-            <h3>Se connecter</h3>
-            <input type="email" id="logEmail" placeholder="Email" />
-            <input type="password" id="logPassword" placeholder="Mot de passe" />
-            <button id="btnLogin" class="primary">Connexion</button>
-          </div>
-        </div>
-        <div class="auth-status">
-          <p id="userStatus">Non connecté</p>
-          <button id="btnLogout" class="secondary hidden">Se déconnecter</button>
-        </div>
+    <section id="authSection">
+      <h2>Connexion / Inscription</h2>
+      <div>
+        <input type="email" id="regEmail" placeholder="Email" />
+        <input type="password" id="regPassword" placeholder="Mot de passe" />
+        <button id="btnRegister">Inscription</button>
       </div>
+      <div>
+        <input type="email" id="logEmail" placeholder="Email" />
+        <input type="password" id="logPassword" placeholder="Mot de passe" />
+        <button id="btnLogin">Connexion</button>
+      </div>
+      <p id="userStatus">Non connecté</p>
+      <button id="btnLogout" class="hidden">Déconnexion</button>
     </section>
 
     <!-- Section Chat -->
-    <section id="chatSection" class="section hidden">
-      <div class="chat-container">
-        <h2>Messages RAMUO</h2>
-        <p class="muted">Espace de conversation basique. Les messages sont visibles par les connectés (démo). Tu pourras ensuite étendre aux chats privés.</p>
-        <div class="chat-inputs">
-          <input type="text" id="profileName" placeholder="Ton prénom ou pseudo (ex: Oumar)" />
-          <textarea id="messageInput" placeholder="Écris ton message..."></textarea>
-          <button id="btnSend" class="primary">Envoyer</button>
-        </div>
-        <div id="messages" class="messages"></div>
-      </div>
+    <section id="chatSection" class="hidden">
+      <h2>Messages RAMUO</h2>
+      <input type="text" id="profileName" placeholder="Ton prénom ou pseudo" />
+      <textarea id="messageInput" placeholder="Écris ton message..."></textarea>
+      <button id="btnSend">Envoyer</button>
+      <div id="messages"></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>© RAMUO — Rencontre authentique. Fait avec ♥ pour la communauté.</p>
+  <footer>
+    <p>© RAMUO — Rencontre authentique</p>
   </footer>
 
-  <!-- Script principal (Firebase v9 modulaire) -->
+  <!-- Script principal -->
   <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -1,50 +1,32 @@
-// script.js — RAMUO avec Realtime Database
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import {
-  getDatabase,
-  ref,
-  push,
-  onChildAdded,
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { 
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+  signOut, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+import { 
+  getDatabase, ref, push, onChildAdded 
+} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
 
-// ⚡ Configuration Firebase (remplace par tes infos)
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBTPMMvThUYN5jQqtN3MCi7Fy2IK3V6bHg",
-    authDomain: "ramuo-352c6.firebaseapp.com",
-    databaseURL: "https://ramuo-352c6-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "ramuo-352c6",
-    storageBucket: "ramuo-352c6.firebasestorage.app",
-    messagingSenderId: "458890962598",
-    appId: "1:458890962598:web:705493b81db4f40e247667",
-    measurementId: "G-SNCEZETYX2"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+// ⚡ Mets ici ta configuration Firebase copiée depuis la console
+const firebaseConfig = {
+  apiKey: "TA_CLE_API",
+  authDomain: "ramuo-352c6.firebaseapp.com",
+  databaseURL: "https://ramuo-352c6-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "ramuo-352c6",
+  storageBucket: "ramuo-352c6.appspot.com",
+  messagingSenderId: "458890962598",
+  appId: "1:458890962598:web:705493b81db4f40e247667",
+  measurementId: "G-SNCEZETYX2"
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
-// Auth (inscription/connexion)
+// Auth
+const userStatus = document.getElementById("userStatus");
+const btnLogout = document.getElementById("btnLogout");
+
 document.getElementById("btnRegister").addEventListener("click", async () => {
   await createUserWithEmailAndPassword(auth,
     document.getElementById("regEmail").value,
@@ -59,14 +41,26 @@ document.getElementById("btnLogin").addEventListener("click", async () => {
     document.getElementById("logPassword").value
   );
   alert("Connexion réussie !");
+  document.getElementById("chatSection").classList.remove("hidden");
 });
 
-document.getElementById("btnLogout").addEventListener("click", async () => {
+btnLogout.addEventListener("click", async () => {
   await signOut(auth);
   alert("Déconnecté !");
+  document.getElementById("chatSection").classList.add("hidden");
 });
 
-// Chat (messages en temps réel)
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userStatus.textContent = `Connecté: ${user.email}`;
+    btnLogout.classList.remove("hidden");
+  } else {
+    userStatus.textContent = "Non connecté";
+    btnLogout.classList.add("hidden");
+  }
+});
+
+// Chat
 const messagesDiv = document.getElementById("messages");
 document.getElementById("btnSend").addEventListener("click", async () => {
   const text = document.getElementById("messageInput").value;
@@ -80,20 +74,16 @@ document.getElementById("btnSend").addEventListener("click", async () => {
     text,
     user: user.email,
     displayName,
-    createdAt: Date.now(),
+    createdAt: Date.now()
   });
   document.getElementById("messageInput").value = "";
 });
 
-// Affichage des messages en direct
 onChildAdded(ref(db, "messages"), (snapshot) => {
   const data = snapshot.val();
   const div = document.createElement("div");
   div.className = "message";
-  div.innerHTML = `<div class="meta">${data.displayName} • ${new Date(data.createdAt).toLocaleString()}</div>
-                   <div>${data.text}</div>`;
+  div.innerHTML = `<b>${data.displayName}:</b> ${data.text}`;
   messagesDiv.appendChild(div);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });
-
-
