@@ -77,3 +77,4 @@ onChildAdded(ref(db, "messages"), (snapshot) => {
   messagesDiv.appendChild(div);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });
+
